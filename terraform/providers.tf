@@ -6,6 +6,12 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+
+    # Add random provider for password generation
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.5"
+    }
   }
 
   # TODO: Configure backend for state storage (we'll add this in Phase 8)
@@ -23,3 +29,6 @@ provider "aws" {
     }
   }
 }
+
+# Random provider
+provider "random" {}

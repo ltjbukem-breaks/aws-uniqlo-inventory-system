@@ -115,7 +115,7 @@ resource "aws_security_group" "lambda" {
   name        = "${var.project_name}-lambda-sg"
   description = "Security group for Lambda functions"
   vpc_id      = aws_vpc.main.id
-  
+
   tags = {
     Name = "${var.project_name}-lambda-sg"
   }
@@ -126,7 +126,7 @@ resource "aws_security_group" "rds" {
   name        = "${var.project_name}-rds-sg"
   description = "Security group for RDS PostgreSQL"
   vpc_id      = aws_vpc.main.id
-  
+
   tags = {
     Name = "${var.project_name}-rds-sg"
   }
@@ -137,7 +137,7 @@ resource "aws_security_group" "vpc_endpoints" {
   name        = "${var.project_name}-vpc-endpoints-sg"
   description = "Security group for VPC endpoints"
   vpc_id      = aws_vpc.main.id
-  
+
   tags = {
     Name = "${var.project_name}-vpc-endpoints-sg"
   }

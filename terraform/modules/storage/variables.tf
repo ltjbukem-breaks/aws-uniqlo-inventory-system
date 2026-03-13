@@ -42,11 +42,11 @@ variable "db_username" {
 variable "db_instance_class" {
   description = "RDS instance class"
   type        = string
-  default     = "db.t3.micro"  # Free tier eligible
+  default     = "db.t3.micro" # Free tier eligible
 }
 
 variable "db_allocated_storage" {
   description = "Allocated storage for RDS (GB)"
   type        = number
-  default     = 20  # Free tier: up to 20GB
+  default     = 20 # Free tier: up to 20GB
 }

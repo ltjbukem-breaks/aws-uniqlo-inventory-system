@@ -27,3 +27,29 @@ output "rds_security_group_id" {
   description = "Security group ID for RDS"
   value       = module.networking.rds_security_group_id
 }
+
+# Storage outputs
+output "sales_data_bucket_name" {
+  description = "Name of S3 bucket for sales data"
+  value       = module.storage.sales_data_bucket_name
+}
+
+output "product_updates_bucket_name" {
+  description = "Name of S3 bucket for product updates"
+  value       = module.storage.product_updates_bucket_name
+}
+
+output "rds_endpoint" {
+  description = "RDS instance endpoint"
+  value       = module.storage.rds_endpoint
+}
+
+output "rds_database_name" {
+  description = "RDS database name"
+  value       = module.storage.rds_database_name
+}
+
+output "db_secret_arn" {
+  description = "ARN of Secrets Manager secret containing DB credentials"
+  value       = module.storage.db_secret_arn
+}

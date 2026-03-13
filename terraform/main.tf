@@ -9,11 +9,19 @@ module "networking" {
   vpc_cidr     = var.vpc_cidr
 }
 
-# TODO: Call the storage module (Phase 2)
-# module "storage" {
-#   source = "./modules/storage"
-#   ...
-# }
+# Storage module
+module "storage" {
+  source = "./modules/storage"
+
+  # Pass variables from root
+  project_name = var.project_name
+  environment  = var.environment
+
+  # Pass outputs from networking module
+  vpc_id                = module.networking.vpc_id
+  private_subnet_ids    = module.networking.private_subnet_ids
+  rds_security_group_id = module.networking.rds_security_group_id
+}
 
 # TODO: Call the compute module (Phase 4)
 # module "compute" {
