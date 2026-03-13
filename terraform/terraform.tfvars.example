@@ -1,0 +1,5 @@
+# terraform/terraform.tfvars.example
+# Copy this file to terraform.tfvars and fill in your values
+# This is used for configuring the SNS email alerts terraform variable
+
+alert_email = "your-email@example.com"  # Replace with your actual email
