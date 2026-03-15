@@ -23,11 +23,20 @@ module "storage" {
   rds_security_group_id = module.networking.rds_security_group_id
 }
 
-# TODO: Call the compute module (Phase 4)
-# module "compute" {
-#   source = "./modules/compute"
-#   ...
-# }
+# Compute module
+module "compute" {
+  source = "./modules/compute"
+
+  project_name             = var.project_name
+  environment              = var.environment
+  private_subnet_ids       = module.networking.private_subnet_ids
+  lambda_security_group_id = module.networking.lambda_security_group_id
+  db_secret_arn            = module.storage.db_secret_arn
+  sales_data_bucket_name        = module.storage.sales_data_bucket_name
+  product_updates_bucket_name   = module.storage.product_updates_bucket_name
+  sales_data_bucket_arn         = module.storage.sales_data_bucket_arn
+  product_updates_bucket_arn    = module.storage.product_updates_bucket_arn
+}
 
 # TODO: Call the messaging module (Phase 5)
 # module "messaging" {

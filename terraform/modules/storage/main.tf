@@ -155,7 +155,7 @@ resource "aws_secretsmanager_secret_version" "db_credentials" {
     username = aws_db_instance.postgres.username
     password = random_password.db_password.result
     engine   = "postgres"
-    host     = aws_db_instance.postgres.endpoint
+    host     = aws_db_instance.postgres.address
     port     = 5432
     dbname   = aws_db_instance.postgres.db_name
   })

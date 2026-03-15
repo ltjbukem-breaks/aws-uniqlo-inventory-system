@@ -53,3 +53,19 @@ output "db_secret_arn" {
   description = "ARN of Secrets Manager secret containing DB credentials"
   value       = module.storage.db_secret_arn
 }
+
+# Compute outputs
+output "sales_processor_arn" {
+  description = "ARN of sales processor Lambda"
+  value       = module.compute.sales_processor_arn
+}
+
+output "product_updater_arn" {
+  description = "ARN of product updater Lambda"
+  value       = module.compute.product_updater_arn
+}
+
+output "inventory_restock_arn" {
+  description = "ARN of inventory restock Lambda"
+  value       = module.compute.inventory_restock_arn
+}

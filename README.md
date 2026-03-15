@@ -117,21 +117,21 @@ Security groups (Lambda SG, RDS SG)
 VPC Endpoints (S3, Secrets Manager)
 Deliverable: Network infrastructure ready for RDS + Lambdas
 
-Phase 2: Storage Layer
+Phase 2: Storage Layer ✅ 
 Build storage module:
 2 S3 buckets (sales-data, product-updates)
 RDS PostgreSQL instance (db.t3.micro)
 Secrets Manager secret for RDS credentials
 DB subnet group
 
-Initialize database schema:
+Initialize database schema: ✅ 
 Create products table
 Create sales table
 Create inventory_logs table
 Seed initial product data (optional)
 Deliverable: Database + S3 buckets ready to receive data
 
-Phase 3: Lambda Functions (Code)
+Phase 3: Lambda Functions (Code) ✅ 
 Write Python code for 3 Lambda functions:
 sales_processor/lambda_function.py - parse sales JSON, validate, insert into DB
 product_updater/lambda_function.py - parse product updates, update DB
@@ -139,7 +139,7 @@ inventory_restock/lambda_function.py - check stock, restock logic
 Create requirements.txt for each (psycopg2, boto3, etc.)
 Deliverable: Lambda code ready to deploy
 
-Phase 4: Compute Infrastructure
+Phase 4: Compute Infrastructure ✅ 
 Build compute module:
 Create 3 Lambda functions in Terraform
 Configure VPC access for Lambdas
@@ -193,3 +193,9 @@ Create sample data files (sales.json, products.json)
 Manual end-to-end test
 Deliverable: Complete, documented project ready for portfolio
 ```
+
+Connecting to EC2 instance
+ssh -i your-key.pem ec2-user@<new-public-ip>
+
+Connecting to RDS
+psql -h <your-rds-endpoint> -U postgres -d uniqlo_sales
