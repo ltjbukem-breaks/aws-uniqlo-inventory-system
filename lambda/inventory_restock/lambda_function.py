@@ -40,8 +40,12 @@ def lambda_handler(event, context):
                 "INSERT INTO inventory_logs (product_id, units_added, triggered_by, restocked_at) VALUES (%s, %s, %s, %s)",
                 (product_id, units_added, "inventory_restock_lambda", restocked_at)
             )
+            cur.execute("SELECT sku FROM products WHERE id = %s", (product_id,))
+            sku = cur.fetchone()[0]
+            print(f"Restocked SKU {sku}: added {units_added} units at {restocked_at}")
+
         conn.commit()
-        print(f"Restocked {len(low_stock_products)} products")
+        print(f"Total products restocked: {len(low_stock_products)}")
     finally:
         cur.close()
         conn.close()
