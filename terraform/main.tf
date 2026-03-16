@@ -36,18 +36,18 @@ module "messaging" {
 module "compute" {
   source = "./modules/compute"
 
-  project_name             = var.project_name
-  environment              = var.environment
-  private_subnet_ids       = module.networking.private_subnet_ids
-  lambda_security_group_id = module.networking.lambda_security_group_id
-  db_secret_arn            = module.storage.db_secret_arn
-  sales_data_bucket_name        = module.storage.sales_data_bucket_name
-  product_updates_bucket_name   = module.storage.product_updates_bucket_name
-  sales_data_bucket_arn         = module.storage.sales_data_bucket_arn
-  product_updates_bucket_arn    = module.storage.product_updates_bucket_arn
-  sales_processor_dlq_arn       = module.messaging.sales_processor_dlq_arn
-  product_updater_dlq_arn       = module.messaging.product_updater_dlq_arn
-  inventory_restock_dlq_arn     = module.messaging.inventory_restock_dlq_arn
+  project_name                = var.project_name
+  environment                 = var.environment
+  private_subnet_ids          = module.networking.private_subnet_ids
+  lambda_security_group_id    = module.networking.lambda_security_group_id
+  db_secret_arn               = module.storage.db_secret_arn
+  sales_data_bucket_name      = module.storage.sales_data_bucket_name
+  product_updates_bucket_name = module.storage.product_updates_bucket_name
+  sales_data_bucket_arn       = module.storage.sales_data_bucket_arn
+  product_updates_bucket_arn  = module.storage.product_updates_bucket_arn
+  sales_processor_dlq_arn     = module.messaging.sales_processor_dlq_arn
+  product_updater_dlq_arn     = module.messaging.product_updater_dlq_arn
+  inventory_restock_dlq_arn   = module.messaging.inventory_restock_dlq_arn
 }
 
 # Scheduling module

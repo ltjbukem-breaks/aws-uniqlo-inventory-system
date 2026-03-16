@@ -21,8 +21,8 @@ resource "aws_iam_role_policy" "lambda" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = ["s3:GetObject"]
+        Effect = "Allow"
+        Action = ["s3:GetObject"]
         Resource = [
           "${var.sales_data_bucket_arn}/*",
           "${var.product_updates_bucket_arn}/*"
@@ -34,8 +34,8 @@ resource "aws_iam_role_policy" "lambda" {
         Resource = [var.db_secret_arn]
       },
       {
-        Effect   = "Allow"
-        Action   = [
+        Effect = "Allow"
+        Action = [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
@@ -43,8 +43,8 @@ resource "aws_iam_role_policy" "lambda" {
         Resource = "arn:aws:logs:*:*:*"
       },
       {
-        Effect   = "Allow"
-        Action   = ["s3:GetObject", "s3:ListBucket"]
+        Effect = "Allow"
+        Action = ["s3:GetObject", "s3:ListBucket"]
         Resource = [
           "${var.sales_data_bucket_arn}/*",
           "${var.product_updates_bucket_arn}/*",
@@ -53,8 +53,8 @@ resource "aws_iam_role_policy" "lambda" {
         ]
       },
       {
-        Effect   = "Allow"
-        Action   = ["sqs:SendMessage"]
+        Effect = "Allow"
+        Action = ["sqs:SendMessage"]
         Resource = [
           var.sales_processor_dlq_arn,
           var.product_updater_dlq_arn,
@@ -112,7 +112,7 @@ resource "aws_lambda_function" "sales_processor" {
     }
   }
 
-    dead_letter_config {
+  dead_letter_config {
     target_arn = var.sales_processor_dlq_arn
   }
 }
@@ -138,7 +138,7 @@ resource "aws_lambda_function" "product_updater" {
     }
   }
 
-    dead_letter_config {
+  dead_letter_config {
     target_arn = var.product_updater_dlq_arn
   }
 }
@@ -164,7 +164,7 @@ resource "aws_lambda_function" "inventory_restock" {
     }
   }
 
-    dead_letter_config {
+  dead_letter_config {
     target_arn = var.inventory_restock_dlq_arn
   }
 }
