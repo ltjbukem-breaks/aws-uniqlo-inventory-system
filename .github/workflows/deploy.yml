@@ -23,7 +23,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install test dependencies
-        run: pip install pytest pg8000
+        run: pip install pytest pg8000 boto3
 
       - name: Run tests
         run: pytest tests/ -v
