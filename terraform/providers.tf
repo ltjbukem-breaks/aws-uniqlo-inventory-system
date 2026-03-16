@@ -14,8 +14,14 @@ terraform {
     }
   }
 
-  # TODO: Configure backend for state storage (we'll add this in Phase 8)
-  # For now, state will be stored locally in terraform.tfstate file
+  backend "s3" {
+    bucket         = "uniqlo-sales-etl-terraform-state"
+    key            = "dev/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "uniqlo-sales-etl-terraform-locks"
+    encrypt        = true
+  }
+
 }
 
 provider "aws" {
