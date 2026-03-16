@@ -29,3 +29,15 @@ variable "sales_data_bucket_arn" {
 variable "product_updates_bucket_arn" {
   description = "ARN of the product updates S3 bucket"
 }
+
+variable "sales_processor_dlq_arn" {
+  description = "ARN of the sales processor DLQ"
+}
+
+variable "product_updater_dlq_arn" {
+  description = "ARN of the product updater DLQ"
+}
+
+variable "inventory_restock_dlq_arn" {
+  description = "ARN of the inventory restock DLQ"
+}

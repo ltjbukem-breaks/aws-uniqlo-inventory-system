@@ -51,6 +51,15 @@ resource "aws_iam_role_policy" "lambda" {
           var.sales_data_bucket_arn,
           var.product_updates_bucket_arn
         ]
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["sqs:SendMessage"]
+        Resource = [
+          var.sales_processor_dlq_arn,
+          var.product_updater_dlq_arn,
+          var.inventory_restock_dlq_arn
+        ]
       }
     ]
   })
@@ -102,6 +111,10 @@ resource "aws_lambda_function" "sales_processor" {
       DB_SECRET_ARN = var.db_secret_arn
     }
   }
+
+    dead_letter_config {
+    target_arn = var.sales_processor_dlq_arn
+  }
 }
 
 resource "aws_lambda_function" "product_updater" {
@@ -124,6 +137,10 @@ resource "aws_lambda_function" "product_updater" {
       DB_SECRET_ARN = var.db_secret_arn
     }
   }
+
+    dead_letter_config {
+    target_arn = var.product_updater_dlq_arn
+  }
 }
 
 resource "aws_lambda_function" "inventory_restock" {
@@ -145,6 +162,10 @@ resource "aws_lambda_function" "inventory_restock" {
     variables = {
       DB_SECRET_ARN = var.db_secret_arn
     }
+  }
+
+    dead_letter_config {
+    target_arn = var.inventory_restock_dlq_arn
   }
 }
 

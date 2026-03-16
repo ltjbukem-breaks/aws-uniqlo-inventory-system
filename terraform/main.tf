@@ -23,6 +23,15 @@ module "storage" {
   rds_security_group_id = module.networking.rds_security_group_id
 }
 
+# Messaging module
+module "messaging" {
+  source = "./modules/messaging"
+
+  project_name = var.project_name
+  environment  = var.environment
+  alert_email  = var.alert_email
+}
+
 # Compute module
 module "compute" {
   source = "./modules/compute"
@@ -36,16 +45,17 @@ module "compute" {
   product_updates_bucket_name   = module.storage.product_updates_bucket_name
   sales_data_bucket_arn         = module.storage.sales_data_bucket_arn
   product_updates_bucket_arn    = module.storage.product_updates_bucket_arn
+  sales_processor_dlq_arn       = module.messaging.sales_processor_dlq_arn
+  product_updater_dlq_arn       = module.messaging.product_updater_dlq_arn
+  inventory_restock_dlq_arn     = module.messaging.inventory_restock_dlq_arn
 }
 
-# TODO: Call the messaging module (Phase 5)
-# module "messaging" {
-#   source = "./modules/messaging"
-#   ...
-# }
+# Scheduling module
+module "scheduling" {
+  source = "./modules/scheduling"
 
-# TODO: Call the scheduling module (Phase 6)
-# module "scheduling" {
-#   source = "./modules/scheduling"
-#   ...
-# }
+  project_name                    = var.project_name
+  environment                     = var.environment
+  inventory_restock_lambda_arn    = module.compute.inventory_restock_arn
+  inventory_restock_function_name = module.compute.inventory_restock_function_name
+}

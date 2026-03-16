@@ -148,7 +148,7 @@ Configure S3 event notifications → Lambda triggers
 Package and deploy Lambda code
 Deliverable: Lambdas deployed and triggered by S3 uploads
 
-Phase 5: Error Handling
+Phase 5: Error Handling ✅ 
 Build messaging module:
 Create 3 SQS DLQs (one per Lambda)
 Configure Lambda DLQ settings
@@ -157,14 +157,14 @@ Create email subscription to SNS
 Set up CloudWatch alarms (DLQ message count → SNS)
 Deliverable: Failed Lambda invocations go to DLQ, you get email alerts
 
-Phase 6: Scheduling
+Phase 6: Scheduling ✅ 
 Build scheduling module:
 Create EventBridge rule (cron: daily at 2 AM)
 Configure EventBridge → inventory-restock Lambda trigger
 Set up IAM permissions
 Deliverable: Inventory restock runs automatically once per day
 
-Phase 7: Testing
+Phase 7: Testing ✅ 
 Write unit tests for Lambda functions:
 test_sales_processor.py - test data validation, DB insertion logic
 test_product_updater.py - test product update logic
