@@ -3,8 +3,16 @@ This project was designed to implement tools I hadn't used in previous projects,
 
 The AWS infrastructure here was created with Terraform (IaC), meaning it can be deployed to an AWS account programmatically, enabling easy infrastructure management and iteration. CI/CD is also integrated via GitHub with included tests, so any Git Push command to the repo triggers automatic tests and infrastructure deployment. 
 
+This inventory system is structured in the following way:
+- Sales
+    - S3 bucket for storing .json sales data, Lambda sales function updates the RDS sales table
+- Products
+    - S3 bucket for storing .json product updates (new price or item), Lambda function updates RDS products table
+- Inventory Updates
+    - Daily scheduled Lambda function to check low stock, and to set stock back to 100 and log it if stock count falls below certain threshold
+
 # Architecture
-TODO
+![image](images/architecture.png)
 
 # Tech Stack
 Cloud Infrastructure
