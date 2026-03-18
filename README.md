@@ -193,7 +193,7 @@ inventory_restock:
 To destroy all project infrastructure, run the following command in Git Bash from the terraform/ directory:
 - terraform destroy
 
-This tears down everything Terraform manages — RDS, Lambdas, VPC, S3 buckets, SQS, SNS, EventBridge, etc.
+This tears down everything Terraform manages: RDS, Lambdas, VPC, S3 buckets, SQS, SNS, EventBridge, etc.
 
 Then manually delete the Terraform state backend resources via the AWS CLI:
 - aws s3 rm s3://<YOUR_BUCKET_NAME> --recursive
@@ -202,4 +202,54 @@ Then manually delete the Terraform state backend resources via the AWS CLI:
 
 Notes: 
 - The S3 bucket must be emptied before it can be deleted, which is what the first command does.
-- Secrets Manager secret — has a minimum 7-day recovery window before full deletion, this is AWS default behavior
+- The Secrets Manager secret has a minimum 7-day recovery window before full deletion, this is AWS default behavior
+
+
+# Screenshots
+
+## Architecture / Infrastructure
+VPC dashboard showing the subnets, route tables, and security groups
+![image](images/vpc_dashboard.png)
+
+RDS instance
+![image](images/rds.png)
+
+## Lambda Functions
+Lambda functions list showing all 3 functions deployed
+![image](images/lambda_1.png)
+
+One Lambda's (sales processor) configuration page
+![image](images/lambda_2.png)
+
+CloudWatch logs from sales processor Lambda function
+![image](images/lambda_3.png)
+
+## Error Handling
+SQS console showing the 3 DLQs
+![image](images/sqs.png)
+
+A DLQ with a message in it (from your invalid sale test)
+![image](images/dlq.png)
+
+CloudWatch alarm in ALARM state
+![image](images/cloudwatch_alarm.png)
+
+SNS email received
+![image](images/sns_email.png)
+
+## CI/CD
+GitHub Actions showing a successful pipeline run with both the test and terraform jobs green
+![image](images/github_cicd.png)
+
+## Data
+### Sales table
+![image](images/rds_sales.png)
+
+### Products table
+![image](images/rds_products.png)
+
+### Inventory logs table
+![image](images/rds_inventory_1.png)
+
+### After invoking a test sale .json file with the data: {"sku": "UNQ-003", "quantity": 10}
+![image](images/rds_sales_2.png)
